@@ -22,7 +22,8 @@ while True:
         #line = (info[0:len(info)-4].decode("utf-8")).split(',')
         print(line)
         
-            
+        if np.size(line) == 1:
+            continue;
         if line[0] == '0':
             #time_vec.append(float(line[3]))
             data_vec.append(float(line[2]))

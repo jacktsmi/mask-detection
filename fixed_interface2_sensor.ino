@@ -7,6 +7,7 @@ long samples[L];
 long sum = 0;
 long avg = 0;
 const int threshold = 900;
+int track = 0;
 
 
 void setup()
@@ -31,17 +32,23 @@ void setup()
 void loop()
 {
   //Serial.println(String(millis())+","+String(sensor.read()));
-
-  Serial.println("Here");
+  //long time = millis();
+  //Serial.println("Here");
   for (int i = 0; i<L; ++i){
     if (samples[i] != 0) {
         sum-=samples[i]; //First, subtract oldest value that you're replacing from sum 
     }
+    //Serial.println(millis()-time);
     samples[i] = sensor.read(); //Then replace that value; sensor.read doesn't return until there is a value
+    //time = millis();
     sum = sum+samples[i];
-    avg = sum/(i+1);
-    //Serial.println(String(avg));
-    //Serial.println("Here");
+    if (track < L){ //Divide by i+1 until array is filled
+      avg = sum/(track+1);
+      track+=1;
+    }
+    else{
+      avg = sum/L;
+    }
     
     if (avg < threshold) {
         Serial.println(String(1)+","+String(avg)+","+String(samples[i])); //Send to Pi
