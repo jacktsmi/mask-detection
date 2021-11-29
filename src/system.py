@@ -92,7 +92,7 @@ try:
             try:
                 mlx.getFrame(frame) # read MLX temperatures into frame var
             except:
-		print('Unable to get frame from thermal camera')
+                print('Unable to get frame from thermal camera')
                 continue
             data_array = (np.reshape(frame,mlx_interp_shape)) # reshape to 24x32
             # Note: Because MLX camera reads it in opposite from imshow, 'origin' is top right and we need to flip if plotting later

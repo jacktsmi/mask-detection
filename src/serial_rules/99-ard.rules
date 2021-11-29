@@ -1,0 +1,3 @@
+#Camera udev rule for EECS452 F2021 mask detection group
+KERNEL=="video?", ATTRS{idVendor}=="2109", SYMLINK+="cam"
+ATTRS{idVendor}=="2341", SYMLINK+="ard"
