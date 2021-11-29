@@ -21,7 +21,7 @@ There are two main commented out sections that could be uncommented if you would
 
 #First, set up the serial port to arduino and all GPIO pins to relay/lock and LED's
 #if __name__ == '__main__':
-ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
+ser = serial.Serial('/dev/ard', 115200, timeout=1)
 ser.flush()
 
 GPIO.setwarnings(False)
@@ -64,59 +64,61 @@ mlx_interp_shape = (mlx_shape[0]*mlx_interp_val,
 frame = np.zeros((24*32,)) # setup array for storing all 768 temperatures
 #t_array = [] #This keeps track of frame rate
 
-while True:
-    if ser.in_waiting > 0:
-    #readline receives unicode encoded string
-    #ASCII encoding is a subset of unicode encoding; it has the same encoding as the first 128 characters of unicode.
-    #But we may have a string that goes beyond ASCII so we use unicde utf-8 decoding
-        line = ser.readline().decode("utf-8").rstrip()
-        ser.reset_input_buffer()
-        line = line.split(',')
-        if len(line)<3:
-            continue
-        if line[0] == '0': # while someone is not there
-            GPIO.output(red,1)
-            GPIO.output(green,1)
-            GPIO.output(relay,0)
-            #print(line)
-            continue
-        print('PERSON')
+try:
+    while True:
+        if ser.in_waiting > 0:
+        #readline receives unicode encoded string
+        #ASCII encoding is a subset of unicode encoding; it has the same encoding as the first 128 characters of unicode.
+        #But we may have a string that goes beyond ASCII so we use unicde utf-8 decoding
+            line = ser.readline().decode("utf-8").rstrip()
+            ser.reset_input_buffer()
+            line = line.split(',')
+            if len(line)<3:
+                continue
+            if line[0] == '0': # while someone is not there
+                GPIO.output(red,1)
+                GPIO.output(green,1)
+                GPIO.output(relay,0)
+                #print(line)
+                continue
+            print('PERSON')
 
-        #Camera capture, run through algorithm, and unlock
-        time.sleep(1)
-        ser.reset_input_buffer()
-        t1 = time.monotonic()
-        try:
-            mlx.getFrame(frame) # read MLX temperatures into frame var
-        except:
-            print("pain.")
-            continue
-        data_array = (np.reshape(frame,mlx_interp_shape)) # reshape to 24x32
-        #Note: Because MLX camera reads it in opposite from imshow, 'origin' is top right and we need to flip if plotting later
+            #Camera capture, run through algorithm, and unlock
+            time.sleep(1)
+            ser.reset_input_buffer()
+            t1 = time.monotonic()
+            try:
+                mlx.getFrame(frame) # read MLX temperatures into frame var
+            except:
+                print("pain.")
+                continue
+            data_array = (np.reshape(frame,mlx_interp_shape)) # reshape to 24x32
+            #Note: Because MLX camera reads it in opposite from imshow, 'origin' is top right and we need to flip if plotting later
 
-        top = data_array[6,12:18]  #Forehead pixels
-        bottom = data_array[15,12:18] #Mouth regions pixels
-        avg = np.mean(np.abs(top-bottom)) #Average of absolute difference between forehead and mouth temperatures 
-        #print(avg)
-        #GPIO.output(red,1) ###IS THIS NEEDED HERE??
-        if(avg<2): #Say difference is < 2 degrees celsius if they're not wearing mask
-            GPIO.output(red,1)
-            GPIO.output(green,0)
-            GPIO.output(relay,0)
-        else:
-            GPIO.output(red,0)
-            GPIO.output(green,1)
-            GPIO.output(relay,1)
-        
-        ##########################################################################
-        #PLOT thermal camera results
-        #therm2.set_data(np.fliplr(data_array))#[10:20,left_col:right_col+1])) # flip left to right
-        #therm2.set_clim(vmin=np.min(data_array),vmax=np.max(data_array)) # set bounds
-        #cbar2.on_mappable_changed(therm2) # update colorbar range
-        #plt.pause(0.001) # required
-        ##########################################################################
+            top = data_array[6,12:18]  #Forehead pixels
+            bottom = data_array[15,12:18] #Mouth regions pixels
+            avg = np.mean(np.abs(top-bottom)) #Average of absolute difference between forehead and mouth temperatures 
+            #print(avg)
+            #GPIO.output(red,1) ###IS THIS NEEDED HERE??
+            if(avg<2): #Say difference is < 2 degrees celsius if they're not wearing mask
+                GPIO.output(red,1)
+                GPIO.output(green,0)
+                GPIO.output(relay,0)
+            else:
+                GPIO.output(red,0)
+                GPIO.output(green,1)
+                GPIO.output(relay,1)
+            
+            ##########################################################################
+            #PLOT thermal camera results
+            #therm2.set_data(np.fliplr(data_array))#[10:20,left_col:right_col+1])) # flip left to right
+            #therm2.set_clim(vmin=np.min(data_array),vmax=np.max(data_array)) # set bounds
+            #cbar2.on_mappable_changed(therm2) # update colorbar range
+            #plt.pause(0.001) # required
+            ##########################################################################
 
-        #Calculate time to get frame and perform calculations, and print frame rate
-        #t_array.append(time.monotonic()-t1) 
-        #print('Sample Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
-
+            #Calculate time to get frame and perform calculations, and print frame rate
+            #t_array.append(time.monotonic()-t1) 
+            #print('Sample Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
+finally:
+    ser.close()
