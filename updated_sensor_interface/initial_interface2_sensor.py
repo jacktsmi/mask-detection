@@ -1,5 +1,11 @@
 import serial
 
+"""
+This is the initial simple code to read values from the Arduino. The Arduino sends a string with 2 values: 
+0 or 1, and running average so far
+This script decodes this string, and prints 'No person' or 'Person' based on 0 or 1 input
+
+"""
 ser = serial.Serial('/dev/ttyACM0', baudrate=9600)
 ser.flush()
 

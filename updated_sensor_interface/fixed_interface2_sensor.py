@@ -2,6 +2,12 @@ import serial, csv, os
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+This is the final code to read values from the Arduino. The Arduino sends a string with 3 values: 
+0 or 1, running average so far, and current sensor measurement
+This script decodes this string, prints 'No person' or 'Person' based on 0 or 1 input, and uses the other 2 sent values to plot the data 
+
+"""
 time_vec, data_vec = [],[]
 moving_avg = []
 datafile_name = 'test_data.csv'

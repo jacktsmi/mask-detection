@@ -1,17 +1,25 @@
 #include <Wire.h>
 #include <VL53L1X.h>
 
+"""
+This is the final code that implements a moving average filter of length L for the sensor values that are read in using the VL53L1X..
+..sensor object from Polulu's library written in C
+It sends three pieces of information to the Raspberry for data visualization: Whether or not a person has been detected...
+...,the running average value so far, and the actual sensor measurement in time. 
+"""
+
 VL53L1X sensor;
-const int L = 45;
+const int L = 35;
 long samples[L]; 
 long sum = 0;
 long avg = 0;
-const int threshold = 914;
+const int threshold = 900;
+int track = 0;
 
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Wire.begin();
   Wire.setClock(400000); // use 400 kHz I2C
 
@@ -31,23 +39,29 @@ void setup()
 void loop()
 {
   //Serial.println(String(millis())+","+String(sensor.read()));
-
-  Serial.println("Here");
+  //long time = millis();
+  //Serial.println("Here");
   for (int i = 0; i<L; ++i){
     if (samples[i] != 0) {
         sum-=samples[i]; //First, subtract oldest value that you're replacing from sum 
     }
+    //Serial.println(millis()-time);
     samples[i] = sensor.read(); //Then replace that value; sensor.read doesn't return until there is a value
+    //time = millis();
     sum = sum+samples[i];
-    avg = sum/(i+1);
-    //Serial.println(String(avg));
-    //Serial.println("Here");
+    if (track < L){ //Divide by i+1 until array is filled
+      avg = sum/(track+1);
+      track+=1;
+    }
+    else{
+      avg = sum/L;
+    }
     
     if (avg < threshold) {
-        Serial.println(String(1)+","+String(avg)); //Send to Pi
+        Serial.println(String(1)+","+String(avg)+","+String(samples[i])); //Send to Pi
     }
     else if (avg > threshold){
-        Serial.println(String(0)+","+String(avg)); //Send to Pi
+        Serial.println(String(0)+","+String(avg)+","+String(samples[i])); //Send to Pi
     }
     
  }

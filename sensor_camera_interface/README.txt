@@ -1,0 +1,2 @@
+This folder contains the two scripts needed to send person/no person information from the Arduino to the Raspberry Pi based on sensor values,..
+...and take a picture with the Raspberry Pi camera if a person is detected.

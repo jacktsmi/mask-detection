@@ -1,0 +1,3 @@
+This folder contains the code to interface sensor-arduino-pi with the moving average implemented on the Arduino.
+The files labeled initial_interface2_sensor are initial attempts for this interface; fixed_interface2_sensor are the final versions...
+...that should be used if you just want to try out the sensor-arduino-pi functionality.
