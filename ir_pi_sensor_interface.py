@@ -36,17 +36,15 @@ mlx_interp_val = 1 # interpolate # on each dimension
 mlx_interp_shape = (mlx_shape[0]*mlx_interp_val,
                     mlx_shape[1]*mlx_interp_val) # new shape
 
-plt.ion()
-fig2,ax2 = plt.subplots(figsize=(12,7))
-therm2 = ax2.imshow(np.zeros(mlx_interp_shape),cmap = plt.cm.bwr,vmin=25,vmax=45)
-cbar2 = fig2.colorbar(therm2)
-cbar2.set_label('Temperature [$^{\circ}$C]',fontsize=14) # colorbar label
+# plt.ion()
+# fig2,ax2 = plt.subplots(figsize=(12,7))
+# therm2 = ax2.imshow(np.zeros(mlx_interp_shape),cmap = plt.cm.bwr,vmin=25,vmax=45)
+# cbar2 = fig2.colorbar(therm2)
+# cbar2.set_label('Temperature [$^{\circ}$C]',fontsize=14) # colorbar label
 
-fig2.canvas.draw() # draw figure to copy background
-ax_background = fig2.canvas.copy_from_bbox(ax2.bbox) # copy background
-fig2.show() # show the figure before blitting
-
-
+# fig2.canvas.draw() # draw figure to copy background
+# ax_background = fig2.canvas.copy_from_bbox(ax2.bbox) # copy background
+# fig2.show() # show the figure before blitting
 frame = np.zeros((24*32,)) # setup array for storing all 768 temperatures
 t_array = []
 tests = []
@@ -122,9 +120,10 @@ while True:
             GPIO.output(relay,1)
         
         #OG IR color
-        therm2.set_data(np.fliplr(data_array))#[10:20,left_col:right_col+1])) # flip left to right
-        therm2.set_clim(vmin=np.min(data_array),vmax=np.max(data_array)) # set bounds
-        cbar2.on_mappable_changed(therm2) # update colorbar range
-        plt.pause(0.001) # required
+#         therm2.set_data(np.fliplr(data_array))#[10:20,left_col:right_col+1])) # flip left to right
+#         therm2.set_clim(vmin=np.min(data_array),vmax=np.max(data_array)) # set bounds
+#         cbar2.on_mappable_changed(therm2) # update colorbar range
+#         plt.pause(0.001) # required
         t_array.append(time.monotonic()-t1)
         #print('Sample Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
+
