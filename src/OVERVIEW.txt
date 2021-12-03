@@ -25,6 +25,10 @@ our program crashes, and it requires power supply to USB ports to reboot in
 order to be fixed. This should be run in that case rather than rebooting entire
 Pi.
 
+mask-reset.sh: Bash file that unbinds and rebinds the USB port with the webcam. This
+should also be run in the event that the video stream freezes after killing the
+programs.
+
 HOW THEY ARE USED TOGETHER:
 
 The read_sensor.ino file is the code uploaded to the Arduino before running
@@ -35,7 +39,7 @@ as taking a picture and performing detection as well as controlling output. The
 face_cap.py file is simply a video stream that runs concurrently with system.py.
 The run.sh is what runs everything that needs to be run to use the system.
 To do this one goes into the terminal and simply types './run.sh' in this
-directory. The owrcycle.sh file is simply to ease the handling of crashes
+directory. The owrcycle.sh and mask-reset.sh files areis simply to ease the handling of crashes
 when they happen.
 
 THEORY OF OPERATION:

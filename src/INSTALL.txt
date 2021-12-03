@@ -1,0 +1,18 @@
+DEPENDENCIES:
+
+* VL53L1X Library for Arduino. To download, go to Library Manager in the Arduino
+IDE, search 'VL53L1X', and install the one by Pololu which has VL53L1X as the title.
+
+* mlx90640 library for Python. To install, go to Terminal and run:
+'sudo pip3 install adafruit-circuitpython-mlx90640'.
+
+* busio module for Python. To install, go to Terminal and run:
+'pip3 install adafruit-blinka'
+
+* GPIO module for Python. To install, go to Terminal and run:
+'sudeo apt-get install rpi.gpio'.
+
+All other dependencies should be already installed in the Linux environment we use
+in the lab.
+
+
