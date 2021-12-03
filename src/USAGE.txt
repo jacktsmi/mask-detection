@@ -15,6 +15,9 @@ video stream. On the first attempt upon booting the Pi, the sensor often has tro
 decoding the start byte. If that happens, just 'Ctrl+C' and rerun the command, it should
 work.
 
+* If the above step said 'Permission denied', type 'chmod u+x run.sh' in the Terminal and
+hit enter.
+
 * If the camera freezes at any point or the system has trouble reading from any device,
 run the two error-handling bash files described in OVERVIEW.txt.
 

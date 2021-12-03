@@ -48,7 +48,7 @@ The system during its 'idle' time is simply displaying a live video feed
 from the webcam and continuously filtering and processing the sensor
 readings until someone comes close enough. When the moving average falls below
 1 meter, a person is detected as being close enough for the rest of the system
-to be triggered. In this event, a 3 second delay takes place before taking
+to be triggered. In this event, a 1 second delay takes place before taking
 a photo with the thermal camera in order to give the person enough time to
 follow the instructions on the video feed and place their head in the correct
 position. It then takes the picture and performs mask detection by taking the

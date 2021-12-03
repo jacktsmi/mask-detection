@@ -15,4 +15,6 @@ IDE, search 'VL53L1X', and install the one by Pololu which has VL53L1X as the ti
 All other dependencies should be already installed in the Linux environment we use
 in the lab.
 
+TO RUN CODE:
 
+Follow instructions in USAGE.txt
