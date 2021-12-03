@@ -100,7 +100,6 @@ try:
             top = data_array[6,12:18]  # Forehead pixels
             bottom = data_array[15,12:18] # Mouth region pixels
             avg = np.mean(np.abs(top-bottom)) # Average of absolute difference between forehead and mouth temperatures 
-            #GPIO.output(red,1) ###IS THIS NEEDED HERE??
             if(avg<2): # If difference is < 2 degrees celsius if they're not wearing mask
                 GPIO.output(red,1)
                 GPIO.output(green,0)
