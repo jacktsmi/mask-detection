@@ -1,3 +1,15 @@
-TODO-JS: add 'prelim' folder in every single folder for files that aren't...
-used in the final project itself. Or we could have one high-level 'prelim'...
-folder and then have sub-folders within that.
+University of Michigan EECS 452 senior design project. Controls a system
+that senses when a person is about to enter a room, takes a thermal image
+of their face, determines whether or not they are wearing a mask, and
+depending on the result controls LEDs and a lock which controls entry to
+the room.
+
+Folders:
+src - Contains code that operates on the final system.
+prelim_code: Code that we made along the way to test devices and interfaces.
+
+Members:
+Alec Xu - alecx@umich.edu
+Jack Smith - jacktsmi@umich.edu
+Reva Kulkarni - kulkarnr@umich.edu
+Samar Tawfik - stawfik@umich.edu
