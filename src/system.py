@@ -86,7 +86,7 @@ try:
             print('PERSON')
 
             # Camera capture, run through algorithm, and unlock
-            time.sleep(1)
+            time.sleep(3)
             ser.reset_input_buffer()
             t1 = time.monotonic()
             try:
