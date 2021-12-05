@@ -1,7 +1,6 @@
 BEFORE RUNNING:
 
-TODO-JS: describe what needs to be changed to the rules in the /etc/udev/rules.d
-before running
+Add both of the files in the 'serial_rules' directory into the 'etc/udev/rules.d' directory on the Raspberry Pi.
 
 Upload the read_sensor.ino code to the Arduino.
 
