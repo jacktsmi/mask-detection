@@ -29,6 +29,12 @@ mask_reset.sh: Bash file that unbinds and rebinds the USB port with the webcam. 
 should also be run in the event that the video stream freezes after killing the
 programs.
 
+serial_rules/99-ard.rules: Updated kernel rules for loading in the Arduino. This
+ensures it is loaded in via device properties rather than by USB port index.
+
+serial_ruels/99-cam.rules: Updated kernel rules for loading in the webcam. This
+ensures it is loaded in via device properties rather than by USB port index.
+
 HOW THEY ARE USED TOGETHER:
 
 The read_sensor.ino file is the code uploaded to the Arduino before running
@@ -41,6 +47,8 @@ The run.sh is what runs everything that needs to be run to use the system.
 To do this one goes into the terminal and simply types './run.sh' in this
 directory. The owrcycle.sh and mask_reset.sh files areis simply to ease the handling of crashes
 when they happen.
+
+See USAGE.txt to see how the rules files should be used.
 
 THEORY OF OPERATION:
 
