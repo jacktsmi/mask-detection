@@ -32,7 +32,7 @@ programs.
 serial_rules/99-ard.rules: Updated kernel rules for loading in the Arduino. This
 ensures it is loaded in via device properties rather than by USB port index.
 
-serial_ruels/99-cam.rules: Updated kernel rules for loading in the webcam. This
+serial_rules/99-cam.rules: Updated kernel rules for loading in the webcam. This
 ensures it is loaded in via device properties rather than by USB port index.
 
 HOW THEY ARE USED TOGETHER:
