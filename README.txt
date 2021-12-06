@@ -7,6 +7,7 @@ the room.
 Folders:
 src - Contains code that operates on the final system.
 prelim_code: Code that we made along the way to test devices and interfaces.
+circuit_diagrams: Photos containing necessary hardware connections prior to running code.
 
 Members:
 Alec Xu - alecx@umich.edu
