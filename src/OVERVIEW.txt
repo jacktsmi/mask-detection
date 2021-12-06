@@ -45,7 +45,7 @@ as taking a picture and performing detection as well as controlling output. The
 face_cap.py file is simply a video stream that runs concurrently with system.py.
 The run.sh is what runs everything that needs to be run to use the system.
 To do this one goes into the terminal and simply types './run.sh' in this
-directory. The owrcycle.sh and mask_reset.sh files areis simply to ease the handling of crashes
+directory. The owrcycle.sh and mask_reset.sh files are simply to ease the handling of crashes
 when they happen.
 
 See USAGE.txt to see how the rules files should be used.
