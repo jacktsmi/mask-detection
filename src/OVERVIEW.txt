@@ -20,7 +20,7 @@ to run the system. It obtains distance readings from the sensor, passes them
 into a moving average filter, and depending on the moving average value
 determines whether a person is there or not.
 
-owrcycle.sh: Bash file that turns reboots power supplied to USB ports. Sometimes
+owrcycle.sh: Bash file that reboots power supplied to USB ports. Sometimes
 our program crashes, and it requires power supply to USB ports to reboot in
 order to be fixed. This should be run in that case rather than rebooting entire
 Pi.
