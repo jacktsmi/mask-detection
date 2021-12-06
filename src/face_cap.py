@@ -1,5 +1,9 @@
 import cv2
 
+"""
+This script creates a live video stream of the webcam on the display monitor, also showing an ellipse and instructions for the user to align their face
+-RK
+"""
 cam = cv2.VideoCapture("/dev/cam")
     
 print(cam.isOpened())
