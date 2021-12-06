@@ -4,8 +4,9 @@
 """
 This is the final code that implements a moving average filter of length L for the sensor values that are read in using the VL53L1X..
 ..sensor object from Polulu's library written in C
-It sends three pieces of information to the Raspberry for data visualization: Whether or not a person has been detected...
+It sends three pieces of information to the Raspberry Pi for data visualization: Whether or not a person has been detected...
 ...,the running average value so far, and the actual sensor measurement in time. 
+-RK
 """
 
 VL53L1X sensor;
